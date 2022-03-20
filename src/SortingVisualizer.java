@@ -23,22 +23,28 @@ public class SortingVisualizer {
 	
 	
 	public void bubbleSortDemonstration() {
+		int size = 64;
+		visualization.setAlgoName("Bubble Sort (" + size + " elements)");
 		visualization.setDelay(1);
-		visualization.initialize(64);
+		visualization.initialize(size);
 		sorting.bubbleSort();
 		visualization.check();
 	}
 	
 	public void selectionSortDemostration() {
+		int size = 64;
+		visualization.setAlgoName("Selection Sort (" + size + " elements)");
 		visualization.setDelay(3);
-		visualization.initialize(64);
+		visualization.initialize(size);
 		sorting.selectionSort();
 		visualization.check();
 	}
 	
 	public void quickSortDemostration() {
+		int size = 512;
+		visualization.setAlgoName("Quick Sort (" + size + " elements)");
 		visualization.setDelay(5);
-		visualization.initialize(512);
+		visualization.initialize(size);
 		sorting.quickSort(0, visualization.length() - 1);
 		visualization.check();
 	}

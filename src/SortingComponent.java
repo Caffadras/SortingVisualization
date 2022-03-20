@@ -33,6 +33,7 @@ public class SortingComponent {
 	    int i = (low - 1);
 	 
 	    for(int j = low; j <= high - 1; j++) {
+	    	provider.incrementComparisons();
 	        if (provider.get(j) < pivot) {
 	            i++;
 	            provider.swap(i, j);
@@ -48,7 +49,8 @@ public class SortingComponent {
 	          high --> Ending index
 	 */
 	public void quickSort(int low, int high) {
-	    if (low < high) {
+		provider.incrementComparisons();
+		if (low < high) {
 	        int pi = partition(low, high);
 	        quickSort(low, pi - 1);
 	        quickSort(pi + 1, high);

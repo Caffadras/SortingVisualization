@@ -5,7 +5,7 @@ public class Main {
 		SortingVisualizer visualizer = new SortingVisualizer();
 		
 
-		//visualizer.bubbleSortDemonstration();
+		visualizer.bubbleSortDemonstration();
 		visualizer.selectionSortDemostration();
 		visualizer.quickSortDemostration();
 		

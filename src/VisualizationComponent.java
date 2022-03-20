@@ -5,22 +5,30 @@ import javax.swing.JPanel;
 import java.awt.Graphics;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 
 public class VisualizationComponent extends JPanel{
 	private final int SCREEN_HEIGHT = 512; 
 	private final int SCREEN_WIDTH = 1024; 
 	private int delayMilis = 1; 
+	private int swapCount = 0; 
+	private int comparisonsCount = 0; 
 	int [] array;
 	int [] colors;
+	
+
 	ArrayList<Integer> toUnmark = new ArrayList<>(20); 
 	private int lineWidth; 
 		
+	private String algoName;
 	public VisualizationComponent(){
 		this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
 		this.setBackground(Color.black);
 	}
 	
 	public void initialize(int length) {
+		swapCount = 0; 
+		comparisonsCount =0; 
 		createArray(length);
 		generateArray();
 		repaint(); 
@@ -43,6 +51,7 @@ public class VisualizationComponent extends JPanel{
 		array[idx2] = temp;
 		delay();
 		repaint();
+		++swapCount;
 	}
 	
 	public int compare(int idx1, int idx2) {
@@ -54,6 +63,7 @@ public class VisualizationComponent extends JPanel{
 		toUnmark.add(idx2);
 		delay();
 		repaint();
+		++comparisonsCount;
 		return Integer.compare(array[idx1], array[idx2]);
 	}
 	public int get(int idx) {
@@ -62,12 +72,20 @@ public class VisualizationComponent extends JPanel{
 		return array[idx];
 	}
 	
+	public void incrementComparisons() {
+		++comparisonsCount;
+	}
+	
 	public int length() {
 		return array.length;
 	}
 	
 	public void setDelay(int newDelay) {
 		delayMilis = newDelay;
+	}
+	
+	public void setAlgoName(String name) {
+		algoName = name;
 	}
 	
 	private void createArray(int length) {
@@ -154,6 +172,14 @@ public class VisualizationComponent extends JPanel{
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+			
+		//drawing string
+		g.setFont(new Font("Monospace", Font.PLAIN, 15));
+		g.setColor(Color.white);
+		g.drawString(algoName + " - " + comparisonsCount + " comparisons, " + swapCount + " swaps, " + delayMilis + " ms delay", 
+				0, g.getFont().getSize());
+		
+		//drawing lines
 		for(int i=0;i<array.length*lineWidth; i+=lineWidth) {
 			g.setColor(getColor(colors[i/lineWidth]));
 			g.fillRect(i, SCREEN_HEIGHT-array[i/lineWidth], lineWidth, SCREEN_HEIGHT-(SCREEN_HEIGHT-array[i/lineWidth]));
