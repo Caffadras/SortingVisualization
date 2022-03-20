@@ -49,4 +49,13 @@ public class SortingVisualizer {
 		visualization.check();
 	}
 	
+	public void inPlaceMergeSortDemostration() {
+		int size = 128;
+		visualization.setAlgoName("In-Place Merge Sort (" + size + " elements)");
+		visualization.setDelay(1);
+		visualization.initialize(size);
+		sorting.mergeSort(0, visualization.length() - 1);
+		visualization.check();
+	}
+	
 }

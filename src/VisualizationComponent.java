@@ -72,6 +72,11 @@ public class VisualizationComponent extends JPanel{
 		return array[idx];
 	}
 	
+	public void set(int idx, int value) {
+		if (idx < 0 || idx > array.length) 
+			throw new ArrayIndexOutOfBoundsException(); 
+		array[idx] = value;
+	}
 	public void incrementComparisons() {
 		++comparisonsCount;
 	}
@@ -110,6 +115,7 @@ public class VisualizationComponent extends JPanel{
 			array[lastIndex] = array[randIndex]; 
 			array[randIndex] = temp; 
 			--lastIndex;
+			
 			colors[randIndex] = 2; 
 			colors[lastIndex] = 2;
 			toUnmark.add(randIndex);
