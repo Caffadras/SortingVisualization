@@ -7,25 +7,38 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 
+/**
+ * Responsible for drawing elements of the array
+ * @author Lenovo
+ *
+ */
 public class VisualizationComponent extends JPanel{
 	private final int SCREEN_HEIGHT = 512; 
 	private final int SCREEN_WIDTH = 1024; 
 	private int delayMilis = 1; 
 	private int swapCount = 0; 
 	private int comparisonsCount = 0; 
+	
 	int [] array;
 	int [] colors;
 	
-
+	//Contains indexes, that should be colored white 
 	ArrayList<Integer> toUnmark = new ArrayList<>(20); 
 	private int lineWidth; 
-		
+	
+	//name of the algorithm 
 	private String algoName;
+	
 	public VisualizationComponent(){
 		this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
 		this.setBackground(Color.black);
 	}
 	
+	/**
+	 * Prepares array for demonstration.
+	 * Creates, initializes and shuffles the array. 
+	 * @param length array length to create 
+	 */
 	public void initialize(int length) {
 		swapCount = 0; 
 		comparisonsCount =0; 
@@ -38,6 +51,13 @@ public class VisualizationComponent extends JPanel{
 		delay(1000);
 	}
 	
+	/**
+	 * Wrapper method. Colors accessed elements in red.
+	 * Swaps two elements.
+	 * @param idx1 first idx of the element to swap  
+	 * @param idx2 second idx of the element to swap 
+	 * @throws ArrayIndexOutOfBoundsException
+	 */
 	public void swap(int idx1, int idx2) {
 		if (idx1 < 0 || idx2 < 0 || idx1 > array.length || idx2> array.length) 
 			throw new ArrayIndexOutOfBoundsException(); 
@@ -54,6 +74,14 @@ public class VisualizationComponent extends JPanel{
 		++swapCount;
 	}
 	
+	/**
+	 * Wrapper method. Colors accessed elements in red.
+	 * Compares two elements.
+	 * @param idx1 first idx of the element to swap  
+	 * @param idx2 second idx of the element to swap 
+	 * @return 0, if the elements are equal, < 0, if array[idx1] < array[idx2], else > 0
+	 * @throws ArrayIndexOutOfBoundsException
+	 */
 	public int compare(int idx1, int idx2) {
 		if (idx1 < 0 || idx2 < 0 || idx1 > array.length || idx2> array.length) 
 			throw new ArrayIndexOutOfBoundsException(); 	
@@ -106,6 +134,10 @@ public class VisualizationComponent extends JPanel{
 		Arrays.fill(colors, 1);
 	}
 
+	/**
+	 * Shuffles the array with Fisher Yates algorithm.
+	 * Colors accessed elements with red 
+	 */
 	private void shuffle() {
 		Random rand = new Random(); 
 		int lastIndex = array.length -1; 
@@ -139,6 +171,11 @@ public class VisualizationComponent extends JPanel{
 		}
 	}
 	
+	/**
+	 * Check if the array is fully sorted. 
+	 * Colors accessed elements with red.
+	 * If the elements is in the right position, colors it in green
+	 */
 	public void check() {
 		colors[0] = 3;
 		for (int i=0; i<array.length-1; ++i) {
@@ -153,6 +190,7 @@ public class VisualizationComponent extends JPanel{
 		repaint();
 	}
 	
+	
 	private void unmark() {
 		for(int i =0; i<toUnmark.size(); ++i) {
 			Integer index = toUnmark.get(i);
@@ -164,6 +202,7 @@ public class VisualizationComponent extends JPanel{
 		}
 		toUnmark.clear();
 	}
+	
 	private Color getColor(int idx) {
 		switch(idx) {
 		case 1: return Color.white;

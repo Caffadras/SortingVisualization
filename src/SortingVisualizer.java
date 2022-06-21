@@ -1,5 +1,10 @@
 import javax.swing.JFrame;
 
+/**
+ * This class visualizes sorting algorithms
+ * @author Dubrovschii Semion
+ *
+ */
 public class SortingVisualizer {
 	private JFrame frame;
 	private VisualizationComponent visualization;
@@ -50,7 +55,7 @@ public class SortingVisualizer {
 	}
 	
 	public void inPlaceMergeSortDemostration() {
-		int size = 128;
+		int size = 256;
 		visualization.setAlgoName("In-Place Merge Sort (" + size + " elements)");
 		visualization.setDelay(1);
 		visualization.initialize(size);

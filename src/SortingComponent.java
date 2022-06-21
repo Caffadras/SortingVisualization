@@ -1,4 +1,9 @@
 
+/**
+ * This class contains sorting algorithms, adapted to visualization.  
+ * @author Dubrovschii Semion
+ *
+ */
 public class SortingComponent {
 	VisualizationComponent provider; 
 	
